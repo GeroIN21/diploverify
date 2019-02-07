@@ -7,15 +7,18 @@
   "license": "MIT",
   "description": "Service for verification diplomas",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/GeroIN21/diploverify"
+    "type": "git",
+    "url": "https://github.com/GeroIN21/diploverify"
   },
   "main": "app.js",
   "scripts": {
     "start": "cross-env DEBUG=express-sequelize nodemon ./bin/www"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-history-api-fallback": "^1.6.0",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^6.2.0",
     "express": "~4.16.0",
@@ -23,6 +26,7 @@
     "jade": "^1.11.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.4",
+    "request": "^2.88.0",
     "sequelize": "^4.42.0"
   },
   "devDependencies": {
