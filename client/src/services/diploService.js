@@ -15,6 +15,7 @@ export default {
     return Api().post('/diplomas', 
       { 
         Captcha: params.Captcha,
+        StudName: params.StudName,
         Serie: params.Serie,
         Year: params.Year
       });

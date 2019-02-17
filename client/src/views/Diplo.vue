@@ -19,12 +19,28 @@
           <!-- Submit form -->
           <v-flex v-if="!submit_unvisible">
             <v-flex xs12>
+              <v-tooltip nudge-right top>
+                <v-text-field
+                  slot="activator"
+                  class='px-0'
+                  v-model='diploStudName'
+                  :rules='studNameRules'
+                  label='ФИО'
+                  required
+                  outline
+                ></v-text-field>
+                <span>Можете ввести только фамилию, либо ФИО целиком</span>
+              </v-tooltip>
+            </v-flex>
+
+            <v-flex xs12>
               <v-text-field
                 class='px-0'
                 v-model='diploSerial'
                 :rules='serialRules'
                 :counter='11'
                 label='Номер диплома'
+                :mask='serieMask'
                 placeholder='XX123456789'
                 required
                 outline
@@ -145,25 +161,24 @@ export default {
     years: [ { year: '', } ],
     selectedYear: [],
     diploSerial: '',
+    diploStudName: '',
     studName: '',
     specialty: '',
     institution: '',
     endingYear: '',
+    serieMask: 'NN#########',
     rules: [ (value) => !!value || 'Это обязательное поле' ],
     serialRules: [
       v => !!v || 'Заполните это поле',
       v => (v && v.length >= 11) || 'Номер должен быть не менее 11 символов',
       v => (v && v.length <= 11) || 'Номер должен быть не более 11 символов',
     ],
+    studNameRules: [
+      v => !!v || 'Заполните это поле',
+    ],
     yearRules: [
       v => !!v || 'Выберите год'
     ],
-    ///////
-    // email: '',
-    // emailRules: [
-    //   v => !!v || 'E-mail is required',
-    //   v => /.+@.+/.test(v) || 'E-mail must be valid'
-    // ]
   }),
 
   methods: {
@@ -189,6 +204,7 @@ export default {
 
         let response = await DiploService.getDipInfo({
           Captcha: Captcha,
+          StudName: this.diploStudName,
           Serie: this.diploSerial,
           Year: this.selectedYear
         });

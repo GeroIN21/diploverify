@@ -6,7 +6,7 @@
           :src="require('../../assets/gerb.png')"
           class="my-3"
           contain
-          height="200"
+          height="120"
         ></v-img>
       </v-flex>
 
