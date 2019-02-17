@@ -2,7 +2,12 @@ const express = require('express');
 const { StudentDiplomas } = require('../models');
 const request = require('request');
 
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 const router = express.Router();
+
+require('dotenv').config();
 
 /**
  * Receiving half info about diplomas; 
@@ -15,15 +20,15 @@ router.post('/', async function (req, res) {
     console.log('\nRequest body: ', req.body);
 
     // Secret key
-    const sectretKey = '6LcDqI8UAAAAAMm0FGFXct5tj7PIIqYwl7oDFb5J';
+    const sectretKey = process.env.RECAPTCHA_SECRET;
 
     // Verify URL
     const verifyUrl = `https://google.com/recaptcha/api/siteverify?secret=${sectretKey}&response=${req.body.Captcha}&remoteip=${req.connection.remoteAddress}`;
 
     request.post(verifyUrl, (err, response, body) => {
 
-      console.log('Verify URL: ', verifyUrl);
-      console.log('Google captcha body: ', body);
+      // console.log('Verify URL: ', verifyUrl);
+      // console.log('Google captcha body: ', body);
       body = JSON.parse(body);
 
       // If not successfull
@@ -39,7 +44,10 @@ router.post('/', async function (req, res) {
     const diplomasInfo = await StudentDiplomas.findOne({
       where: {
         Serie: req.body.Serie,
-        EndingYear: req.body.Year
+        EndingYear: req.body.Year,
+        StudName: { 
+          [Op.like]: req.body.StudName + '%'
+        },        
       },
     })
 

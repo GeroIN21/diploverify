@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         isAlphanumeric: true,
         is: { 
           args: /(\W|^)[\w.\-]{0,2}\d{0,9}$/i,
-          msg: 'Error checking series'
+          msg: 'Serial number verification error'
        },
       }
     },    
