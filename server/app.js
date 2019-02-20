@@ -6,13 +6,9 @@ const bodyParser    = require('body-parser');
 const logger        = require('morgan');
 const router        = require('./routes/router');
 const history       = require('connect-history-api-fallback');
-const cors          = require('cors');
+//const cors          = require('cors');
 
 const app = express();
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -20,16 +16,15 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(cors());
+//app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../client/dist')));
 
-const staticFileMiddleware = express.static('../client/dist');
+const staticFileMiddleware = express.static(path.join(__dirname, '../client/dist'));
 app.use(staticFileMiddleware);
 app.use(history({
   verbose: true,

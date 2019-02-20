@@ -10,7 +10,7 @@ const router = express.Router();
 require('dotenv').config();
 
 /**
- * Receiving half info about diplomas; 
+ * Receiving info about diplomas; 
  * Route: [<host>:/diplomas/] 
  * 
  * */

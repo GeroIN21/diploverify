@@ -16,8 +16,9 @@
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "D08324cf",
+    "database": "diplo",
+    "port": "3312",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
