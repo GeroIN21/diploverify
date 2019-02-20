@@ -10,8 +10,6 @@ export default {
   // Used for check of the diploma with the response detailed information
   getDipInfo(params) {
 
-    console.log('\nAxios params: ', params);
-
     return Api().post('/diplomas', 
       { 
         Captcha: params.Captcha,

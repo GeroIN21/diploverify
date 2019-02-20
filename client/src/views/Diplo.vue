@@ -209,8 +209,6 @@ export default {
           Year: this.selectedYear
         });
 
-        console.log(response);
-
         if (response.status === 200) {
 
           this.studName = response.data.StudName;
