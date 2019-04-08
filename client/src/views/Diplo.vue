@@ -40,7 +40,6 @@
                 :rules='serialRules'
                 :counter='11'
                 label='Номер диплома'
-                :mask='serieMask'
                 placeholder='XX123456789'
                 required
                 outline
@@ -145,10 +144,10 @@
 'use strict';
 
 import DiploService from '../services/diploService.js';
-import Vue from 'vue'
-import { VueReCaptcha } from 'vue-recaptcha-v3'
+import Vue from 'vue';
+import { VueReCaptcha } from 'vue-recaptcha-v3';
 
-Vue.use(VueReCaptcha, { siteKey: '6LcDqI8UAAAAAMLdGhtLhotf6YoDfXKOQnY0anJE' })
+Vue.use(VueReCaptcha, { siteKey: '6LcDqI8UAAAAAMLdGhtLhotf6YoDfXKOQnY0anJE' });
 
 export default {
   data: () => ({
@@ -166,7 +165,6 @@ export default {
     specialty: '',
     institution: '',
     endingYear: '',
-    serieMask: 'NN#########',
     rules: [ (value) => !!value || 'Это обязательное поле' ],
     serialRules: [
       v => !!v || 'Заполните это поле',
@@ -200,7 +198,7 @@ export default {
         let Captcha;
         await this.$recaptcha('login').then((token) => {
           Captcha = token;
-        })
+        });
 
         let response = await DiploService.getDipInfo({
           Captcha: Captcha,
