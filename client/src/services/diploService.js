@@ -10,13 +10,12 @@ export default {
   // Used for check of the diploma with the response detailed information
   getDipInfo(params) {
 
-    return Api().post('/diplomas', 
-      { 
-        Captcha: params.Captcha,
-        StudName: params.StudName,
-        Serie: params.Serie,
-        Year: params.Year
-      });
+    return Api().post('/diplomas', {
+      Captcha: params.Captcha,
+      StudName: params.StudName,
+      Serie: params.Serie,
+      Year: params.Year
+    });
 
   }
 

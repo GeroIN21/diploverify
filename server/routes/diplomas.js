@@ -17,8 +17,6 @@ require('dotenv').config();
 router.post('/', async function (req, res) {
   try {
 
-    console.log('\nRequest body: ', req.body);
-
     // Secret key
     const sectretKey = process.env.RECAPTCHA_SECRET;
 
@@ -27,8 +25,6 @@ router.post('/', async function (req, res) {
 
     request.post(verifyUrl, (err, response, body) => {
 
-      // console.log('Verify URL: ', verifyUrl);
-      // console.log('Google captcha body: ', body);
       body = JSON.parse(body);
 
       // If not successfull
@@ -42,6 +38,7 @@ router.post('/', async function (req, res) {
     });
 
     const diplomasInfo = await StudentDiplomas.findOne({
+      attributes: ['Serie', 'StudName', 'Specialty', 'Institution', 'EndingYear'],
       where: {
         Serie: req.body.Serie,
         EndingYear: req.body.Year,
